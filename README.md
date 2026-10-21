@@ -4,6 +4,8 @@ The website for Sant Baba Jagjit Singh Ji Harkhowal Wale. It updates itself ever
 
 - **Videos**: new uploads on Babaji's YouTube channel appear at the top of the site.
 - **Audio katha**: new recordings added to Babaji's section on Gurmatveechar appear automatically, newest first. They play on the site in its own player, which remembers where each listener stopped.
+- **Topics**: videos and series are gathered under Gurmat themes (Naam, Hukam, Haumai, Mann and more). The themes, their Gurmukhi names and the words that place a video under each are set in `"topics"` in `config.json`.
+- **Language**: visitors can switch the whole site between English and Punjabi.
 - **Programmes** (optional): upcoming programmes listed in a Google Sheet appear in a small section. If the sheet is empty, the section stays hidden.
 
 Hosting is free on GitHub Pages. The only running cost is the harkhowal.com domain renewal.

@@ -103,5 +103,245 @@
     "Vichar_Sagar": "ਵਿਚਾਰ ਸਾਗਰ",
     "Yog_Darshan": "ਯੋਗ ਦਰਸ਼ਨ",
     "__single": "ਕਥਾ"
-  }
+  },
+  "topics": [
+    {
+      "id": "gurbani",
+      "gurmukhi": "ਗੁਰਬਾਣੀ",
+      "english": "Gurbani",
+      "about": "Katha of Sri Guru Granth Sahib Ji and the daily banis, line by line.",
+      "hue": [
+        "#ef8a17",
+        "#8a2c06"
+      ],
+      "words": [
+        "ਗੁਰਬਾਣੀ",
+        "ਸ਼ਬਦ",
+        "ਸਬਦ",
+        "ਬਾਣੀ",
+        "ਜਪੁਜੀ",
+        "ਸੁਖਮਨੀ",
+        "ਸੰਗਰਾਂਦ",
+        "Gurbani",
+        "Shabad"
+      ],
+      "series": [
+        "sri-guru-granth-sahib-ji-di-lareevar-katha",
+        "jap-ji-sahib-katha",
+        "nitnem-bani-katha",
+        "sukhmani-sahib",
+        "baramaha"
+      ]
+    },
+    {
+      "id": "naam",
+      "gurmukhi": "ਨਾਮ",
+      "english": "Naam",
+      "about": "Remembrance of Waheguru's Name, and how to keep it in daily life.",
+      "hue": [
+        "#e0a21b",
+        "#6b4508"
+      ],
+      "words": [
+        "ਨਾਮ",
+        "ਸਿਮਰਨ",
+        "ਭਜਨ",
+        "ਜਾਪ",
+        "ਅੰਮ੍ਰਿਤ ਵੇਲ",
+        "Naam",
+        "Simran"
+      ],
+      "series": [
+        "jap-ji-sahib-katha",
+        "sukhmani-sahib",
+        "adhyatmik-veechar"
+      ]
+    },
+    {
+      "id": "hukam",
+      "gurmukhi": "ਹੁਕਮ",
+      "english": "Hukam",
+      "about": "Living in the Divine Will, and the working of karma.",
+      "hue": [
+        "#3a63d8",
+        "#14265e"
+      ],
+      "words": [
+        "ਹੁਕਮ",
+        "ਭਾਣਾ",
+        "ਰਜ਼ਾ",
+        "ਕਰਮ",
+        "Hukam"
+      ],
+      "series": [
+        "jap-ji-sahib-katha"
+      ]
+    },
+    {
+      "id": "haumai",
+      "gurmukhi": "ਹਉਮੈ",
+      "english": "Haumai",
+      "about": "Ego, pride and the path to humility.",
+      "hue": [
+        "#cf4652",
+        "#55101d"
+      ],
+      "words": [
+        "ਹਉਮੈ",
+        "ਹੰਕਾਰ",
+        "ਅਹੰਕਾਰ",
+        "ਮਰਯਾਦਾ",
+        "Haumai"
+      ],
+      "series": [
+        "vichar-sagar",
+        "man-budh-atam"
+      ]
+    },
+    {
+      "id": "mann",
+      "gurmukhi": "ਮਨ",
+      "english": "Mann",
+      "about": "Understanding the mind, its desires and how to still it.",
+      "hue": [
+        "#22a094",
+        "#0b4744"
+      ],
+      "words": [
+        "ਮਨ ",
+        "ਫੁਰਨੇ",
+        "ਵਾਸ਼ਨਾ",
+        "ਚਿੰਤਾ",
+        "ਸ਼ਾਂਤੀ",
+        "Mann"
+      ],
+      "series": [
+        "man-budh-atam",
+        "om-pantanjali-yog-shastar",
+        "yog-darshan"
+      ]
+    },
+    {
+      "id": "vairaag",
+      "gurmukhi": "ਵੈਰਾਗ",
+      "english": "Vairaag",
+      "about": "Detachment from Maya and longing for the Divine.",
+      "hue": [
+        "#7d5cc8",
+        "#2b185c"
+      ],
+      "words": [
+        "ਵੈਰਾਗ",
+        "ਮੌਤ",
+        "ਇਕਾਂਤ",
+        "ਮਾਇਆ",
+        "ਸੰਸਾਰ",
+        "Vairag"
+      ],
+      "series": [
+        "vairaag-shatak",
+        "astavakra-gita-katha",
+        "dhampad"
+      ]
+    },
+    {
+      "id": "itihaas",
+      "gurmukhi": "ਇਤਿਹਾਸ",
+      "english": "Itihaas",
+      "about": "The lives of the Gurus, Sikh history and the Sants.",
+      "hue": [
+        "#b15a2c",
+        "#3d1808"
+      ],
+      "words": [
+        "ਇਤਿਹਾਸ",
+        "ਸਾਖੀ",
+        "ਜੀਵਨ",
+        "ਸ਼ਹੀਦ",
+        "ਗੁਰਪੁਰਬ",
+        "ਪ੍ਰਕਾਸ਼ ਪੁਰਬ",
+        "History",
+        "Jeevan"
+      ],
+      "series": [
+        "sri-gurpartap-suraj-parkash-katha",
+        "sri-nanak-parkash-katha",
+        "sikh-raaj-ke-usariyo"
+      ]
+    },
+    {
+      "id": "vaaran",
+      "gurmukhi": "ਵਾਰਾਂ ਤੇ ਕਬਿੱਤ",
+      "english": "Bhai Gurdas Ji",
+      "about": "The Vaaran and Kabit of Bhai Gurdas Ji, and the Ghazals of Bhai Nand Lal Ji.",
+      "hue": [
+        "#c2547a",
+        "#4a0f2a"
+      ],
+      "words": [
+        "ਭਾਈ ਗੁਰਦਾਸ",
+        "ਵਾਰ ",
+        "ਕਬਿੱਤ",
+        "ਭਾਈ ਨੰਦ ਲਾਲ"
+      ],
+      "series": [
+        "bhai-gurdas-de-kabit-savaiye-katha",
+        "bhai-gurdas-di-vaaran-di-katha",
+        "gazlan-bhai-nand-lal-ji"
+      ]
+    },
+    {
+      "id": "gyan",
+      "gurmukhi": "ਗਿਆਨ",
+      "english": "Gyan",
+      "about": "Vedant and Indian philosophy, explained through Gurmat.",
+      "hue": [
+        "#4f6f92",
+        "#17263a"
+      ],
+      "words": [
+        "ਗਿਆਨ",
+        "ਵੇਦਾਂਤ",
+        "ਆਤਮ",
+        "ਬ੍ਰਹਮ",
+        "ਦਰਸ਼ਨ"
+      ],
+      "series": [
+        "vichar-sagar",
+        "vichar-mala",
+        "vedant-darshan",
+        "yog-darshan",
+        "adhyatam-parkash",
+        "astavakra-gita-katha",
+        "parbodh-chandar-natak-katha",
+        "sarkutavali",
+        "dajistar",
+        "bhavrasamrit"
+      ]
+    },
+    {
+      "id": "grihasth",
+      "gurmukhi": "ਗ੍ਰਿਹਸਤ",
+      "english": "Grihasth",
+      "about": "Family life, conduct and living well in the world.",
+      "hue": [
+        "#8b9a3a",
+        "#2f3a0e"
+      ],
+      "words": [
+        "ਗ੍ਰਿਹਸਤ",
+        "ਪਰਿਵਾਰ",
+        "ਬੱਚੇ",
+        "ਪਤੀ",
+        "ਪਤਨੀ",
+        "ਸੇਵਾ"
+      ],
+      "series": [
+        "brahmchari-pati-patni-dharam",
+        "brahmchari-katha",
+        "chanaka-raajniti",
+        "discussions-questions-and-answers"
+      ]
+    }
+  ]
 }
