@@ -1,0 +1,9 @@
+// Cloudflare settings: this is a static site, so Cloudflare only needs to serve the files in this folder.
+{
+  "name": "harkhowal-site",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./",
+    "not_found_handling": "single-page-application"
+  }
+}
