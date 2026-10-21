@@ -1,0 +1,32 @@
+{
+ "_how_to_edit": "Add a new trip at the top of the list. 'image' can be a path to a photo in the images/ folder (e.g. images/uk-2026.jpg) or left empty. Remove 'example': true from real posts. If Instagram is connected (behold_feed_url in config.json), Instagram posts show here automatically and this list is used as a fallback.",
+ "posts": [
+  {
+   "example": true,
+   "title": "Barsi samagam at Dera Sant Ghar",
+   "place": "Harkhowal, Hoshiarpur",
+   "date": "",
+   "image": "",
+   "text": "Akhand Paath, kirtan and katha in remembrance of Sant Baba Jawala Singh Ji, with sangat from across Doaba.",
+   "link": ""
+  },
+  {
+   "example": true,
+   "title": "Katha divans with UK sangat",
+   "place": "Birmingham & London",
+   "date": "",
+   "image": "",
+   "text": "A week of evening divans on Sukhmani Sahib, with Amrit Sanchar held on the final Sunday.",
+   "link": ""
+  },
+  {
+   "example": true,
+   "title": "Hola Mohalla darshan",
+   "place": "Anandpur Sahib",
+   "date": "",
+   "image": "",
+   "text": "Babaji joined the sangat at Takht Sri Kesgarh Sahib and spoke on the founding of the Khalsa and the Panj Pyare.",
+   "link": ""
+  }
+ ]
+}

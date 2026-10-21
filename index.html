@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Harkhowal Online</title>
+<meta name="description" content="Gurbani katha and vichar by Sant Baba Jagjit Singh Ji Harkhowal Wale: audio katha, videos and Babaji's yatra.">
+<meta property="og:title" content="Sant Baba Jagjit Singh Ji | Harkhowal Wale">
+<meta property="og:description" content="Gurbani katha and vichar: audio katha, videos and Babaji's yatra.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Mukta+Mahee:wght@300;400;600;700&display=swap">
+<style>
+/* Layout: navy masthead with ੴ; bands for Yatra, Audio library, Video, About; kesri is the single accent */
+:root{
+  --paper:#f4f5f8; --surface:#ffffff; --ink:#18213d; --muted:#5b6380; --line:#dcdfe8;
+  --navy:#1a2550; --navy-ink:#eef0f7; --kesri:#d9791a; --kesri-soft:#fbe9d6;
+  --display:"Young Serif", Georgia, serif;
+  --body:"Mukta Mahee","Noto Sans Gurmukhi",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0f1428; --surface:#171e38; --ink:#e7e9f2; --muted:#9aa1bd; --line:#2a3255;
+  --navy:#0a0f22; --kesri:#f0953a; --kesri-soft:#3a2a1a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f1428; --surface:#171e38; --ink:#e7e9f2; --muted:#9aa1bd; --line:#2a3255;
+  --navy:#0a0f22; --kesri:#f0953a; --kesri-soft:#3a2a1a; color-scheme:dark}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.15;text-wrap:balance;margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--kesri);outline-offset:3px}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--kesri);font-weight:600;margin-bottom:6px}
+
+/* nav */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--navy)}
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--navy);color:var(--navy-ink);border-bottom:1px solid rgba(255,255,255,.08)}
+header.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.brand b{font-family:var(--display);font-weight:400;font-size:22px}
+.brand span{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--kesri)}
+nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+nav a{display:block;padding:6px 12px;border-radius:999px;text-decoration:none;font-size:15px;opacity:.85}
+nav a:hover{opacity:1;background:rgba(255,255,255,.08)}
+
+/* hero */
+.hero{background:var(--navy);color:var(--navy-ink);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center;padding-block:56px 64px}
+.hero .gur{font-size:15px;color:var(--kesri);margin-bottom:14px}
+.hero h1{font-size:clamp(34px,5.4vw,58px)}
+.hero p{max-width:52ch;color:#c4c9de;margin:18px 0 26px;font-size:18px}
+.onkar{font-size:clamp(150px,22vw,260px);line-height:1;text-align:center;color:var(--kesri);font-weight:600;user-select:none}
+.stats{display:flex;gap:28px;flex-wrap:wrap;margin-top:28px;font-variant-numeric:tabular-nums}
+.stats b{display:block;font-family:var(--display);font-weight:400;font-size:28px;color:var(--navy-ink)}
+.stats span{font-size:14px;color:#9aa1bd}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;padding:10px 20px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;font-family:inherit}
+.btn.primary{background:var(--kesri);color:#1a1205}
+.btn.ghost{border-color:rgba(255,255,255,.3);color:var(--navy-ink);background:transparent}
+.btn.line{border-color:var(--line);color:var(--ink);background:var(--surface)}
+.btn:hover{filter:brightness(1.08)}
+
+/* sections */
+section.band{padding-block:72px 8px}
+.head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.head h2{font-size:clamp(28px,3.6vw,40px)}
+.head p{color:var(--muted);max-width:48ch;margin:0}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:14px;padding:28px;color:var(--muted);text-align:center}
+
+/* yatra */
+.yatra{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.post{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0;text-decoration:none}
+.post .ph{aspect-ratio:4/3;max-width:100%;background:radial-gradient(circle at 70% 30%,var(--kesri-soft),transparent 60%),linear-gradient(160deg,var(--navy),#2c3a72);display:flex;align-items:flex-end;padding:14px;color:var(--navy-ink);font-size:13px;letter-spacing:.1em;text-transform:uppercase;background-size:cover;background-position:center}
+.post .bd{padding:18px 20px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
+.meta{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.post h3{font-size:22px}
+.post p{margin:0;color:var(--muted)}
+.tag{display:inline-block;font-size:12px;padding:1px 8px;border-radius:999px;background:var(--kesri-soft);color:var(--ink);margin-left:6px;vertical-align:2px}
+
+/* audio library */
+.tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:20px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;flex:1;min-width:0}
+.chip{font:inherit;font-size:15px;padding:7px 15px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#q{font:inherit;font-size:15px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);width:240px;max-width:100%}
+.series{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.ser{text-align:left;font:inherit;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-width:0}
+.ser:hover{border-color:var(--kesri)}
+.ser b{font-weight:600;line-height:1.3}
+.ser span{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.ser.big{grid-column:span 2;background:var(--navy);color:var(--navy-ink);border-color:var(--navy)}
+.ser.big b{font-family:var(--display);font-weight:400;font-size:24px}
+.ser.big span{color:#9aa1bd}
+.recent{margin-bottom:28px}
+.recent h3{font-family:var(--body);font-weight:600;font-size:16px;margin-bottom:10px}
+
+/* track drawer */
+.drawer{position:fixed;inset:0;z-index:20;display:flex;justify-content:flex-end;background:rgba(10,15,34,.5)}
+.drawer .pane{background:var(--paper);width:min(560px,100%);height:100%;overflow:auto;padding:28px max(20px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) 24px;display:flex;flex-direction:column;gap:16px}
+.drawer h3{font-size:28px}
+.close{align-self:flex-end;font:inherit;background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:4px 14px;cursor:pointer}
+.tracks{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.trk{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:center;padding:10px 16px;border-top:1px solid var(--line);text-decoration:none;color:inherit;width:100%;background:none;border-left:0;border-right:0;border-bottom:0;font:inherit;text-align:left;cursor:pointer}
+.tracks .trk:first-child{border-top:0}
+.trk:hover{background:var(--kesri-soft)}
+.trk .n{width:34px;height:34px;border-radius:50%;background:var(--kesri);color:#1a1205;display:grid;place-items:center}
+.trk .n svg{width:12px;height:12px;fill:currentColor;margin-left:2px}
+.trk .t{min-width:0}
+.trk .t b{display:block;font-weight:600;font-size:15px;overflow-wrap:anywhere}
+.trk .t span{font-size:13px;color:var(--muted)}
+
+/* player bar (only when streaming is on) */
+.player{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--navy);color:var(--navy-ink);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.player b{font-weight:600;font-size:15px;flex:1;min-width:180px}
+.player audio{flex:2;min-width:240px;max-width:100%}
+
+/* video */
+.vids{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.vid{display:flex;flex-direction:column;gap:10px;min-width:0}
+.vid .th{aspect-ratio:16/9;max-width:100%;border-radius:12px;overflow:hidden;position:relative;background:linear-gradient(135deg,#2c3a72,var(--navy));border:0;padding:0;cursor:pointer;width:100%}
+.vid .th img{width:100%;height:100%;object-fit:cover}
+.vid .th .pb{position:absolute;inset:0;margin:auto;width:58px;height:58px;border-radius:50%;background:rgba(10,15,34,.6);color:#fff;display:grid;place-items:center;transition:transform .2s}
+.vid .th:hover .pb{transform:scale(1.08);background:var(--kesri);color:#1a1205}
+.vid .th .pb svg{width:18px;height:18px;fill:currentColor;margin-left:3px}
+.vid iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:12px}
+.vid h3{font-family:var(--body);font-weight:600;font-size:17px;line-height:1.35}
+.vid span{font-size:14px;color:var(--muted)}
+.more{margin-top:24px;display:flex;justify-content:center}
+
+/* lineage */
+.lineage{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:36px}
+.chain{list-style:none;margin:0;padding:0}
+.chain li{position:relative;padding:0 0 18px 26px;border-left:2px solid var(--line)}
+.chain li:last-child{padding-bottom:0;border-left-color:transparent}
+.chain li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--kesri)}
+.chain li.now::before{background:var(--kesri)}
+.chain b{font-weight:600}
+.chain span{display:block;font-size:14px;color:var(--muted)}
+.lineage h3{font-size:28px;margin-bottom:12px}
+.lineage p{color:var(--muted);margin:0 0 12px;max-width:62ch}
+
+/* footer */
+footer{background:var(--navy);color:var(--navy-ink);margin-top:80px}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-block:40px}
+footer .gur{color:var(--kesri);font-size:18px}
+footer small{color:#9aa1bd}
+.social{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.social a{font-size:14px;text-decoration:none;border:1px solid rgba(255,255,255,.25);padding:4px 12px;border-radius:999px}
+.social a:hover{background:rgba(255,255,255,.08)}
+.copy{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.copy code{font-family:var(--body);background:rgba(255,255,255,.08);padding:4px 10px;border-radius:8px;user-select:all}
+.copy button{font:inherit;font-size:14px;background:transparent;color:var(--navy-ink);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:4px 12px;cursor:pointer}
+.updated{font-size:13px;color:#9aa1bd;margin-top:8px}
+
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr}
+  .onkar{display:none}
+  .yatra,.vids{grid-template-columns:1fr 1fr}
+  .lineage{grid-template-columns:1fr;padding:24px}
+}
+@media (max-width:560px){
+  .yatra,.vids{grid-template-columns:1fr}
+  .ser.big{grid-column:auto}
+  nav a{padding:6px 8px}
+  #q{width:100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><b>Harkhowal</b><span>Online</span></a>
+    <nav aria-label="Main"><ul>
+      <li><a href="#yatra">Yatra</a></li>
+      <li><a href="#audio">Audio Katha</a></li>
+      <li><a href="#video">Videos</a></li>
+      <li><a href="#about">About</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="gur">ਸੰਤ ਬਾਬਾ ਜਗਜੀਤ ਸਿੰਘ ਜੀ ਹਰਖੋਵਾਲ ਵਾਲੇ</div>
+      <h1>Gurbani katha and vichar from Sant Baba Jagjit Singh Ji, Harkhowal Wale</h1>
+      <p>Listen to the full Lareevar katha of Sri Guru Granth Sahib Ji and dozens of other series, watch Babaji's latest videos, and follow his yatra to sangats around the world.</p>
+      <div class="btns">
+        <a class="btn primary" href="#audio">Listen to katha</a>
+        <a class="btn ghost" href="#video">Latest videos</a>
+      </div>
+      <div class="stats">
+        <div><b id="st-series">36</b><span>katha series</span></div>
+        <div><b id="st-tracks">990+</b><span>recordings</span></div>
+        <div><b>1988</b><span>earliest recording</span></div>
+      </div>
+    </div>
+    <div class="onkar" aria-hidden="true">ੴ</div>
+  </div>
+</section>
+
+<main>
+  <section class="band" id="yatra">
+    <div class="wrap">
+      <div class="head">
+        <div><div class="eyebrow">Travel blog</div><h2>Babaji's Yatra</h2></div>
+        <p>Updates and photographs from Babaji's visits to gurdwaras and sangats, at home in Punjab and abroad.</p>
+      </div>
+      <div class="yatra" id="yatra-list"></div>
+    </div>
+  </section>
+
+  <section class="band" id="audio">
+    <div class="wrap">
+      <div class="head">
+        <div><div class="eyebrow">Audio</div><h2>Katha library</h2></div>
+        <p>Every series Babaji has recorded, updated daily from Gurmatveechar. Choose a series to see its recordings.</p>
+      </div>
+      <div class="recent" id="recent" hidden>
+        <h3>Recently added</h3>
+        <div class="tracks" id="recent-list"></div>
+      </div>
+      <div class="tools">
+        <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+        <input id="q" type="search" placeholder="Search series" aria-label="Search series">
+      </div>
+      <div class="series" id="series"></div>
+    </div>
+  </section>
+
+  <section class="band" id="video">
+    <div class="wrap">
+      <div class="head">
+        <div><div class="eyebrow">Video</div><h2>Latest from YouTube</h2></div>
+        <p>New uploads from Babaji's channel appear here automatically.</p>
+      </div>
+      <div class="vids" id="vids"></div>
+      <div class="more"><a class="btn line" id="yt-more" href="https://www.youtube.com/@Santjagjitsinghjiharkhowal" target="_blank" rel="noopener">All videos on YouTube →</a></div>
+    </div>
+  </section>
+
+  <section class="band" id="about">
+    <div class="wrap">
+      <div class="lineage">
+        <div>
+          <div class="eyebrow">Sampardai</div>
+          <ol class="chain">
+            <li><b>Bhai Daya Singh Ji</b><span>First of the Panj Pyare</span></li>
+            <li><b>Sant Karam Singh Ji</b><span>Hoti Mardan</span></li>
+            <li><b>Sant Aiya Singh Ji</b><span>Hoti Mardan</span></li>
+            <li><b>Sant Jawala Singh Ji</b><span>Harkhowal · 1889–1957</span></li>
+            <li class="now"><b>Sant Baba Jagjit Singh Ji</b><span>Harkhowal Wale</span></li>
+          </ol>
+        </div>
+        <div>
+          <h3>Dera Sant Ghar, Harkhowal</h3>
+          <p>Sant Jawala Singh Ji left the army after serving in France during the First World War and joined the Dera at Hoti Mardan under Sant Aiya Singh Ji. In 1918 he settled between the villages of Harkhowal and Pandori Bibi, about 11 km southwest of Hoshiarpur.</p>
+          <p>Dera Sant Ghar grew as sangat came for his simple, clear discourses, and thousands took Amrit at his hands. Today Sant Baba Jagjit Singh Ji continues this seva through katha of Gurbani and Gurmat vichar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="gur">ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖ਼ਾਲਸਾ, ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫ਼ਤਿਹ</div>
+      <small>Harkhowal Online · Dera Sant Ghar, Harkhowal, Hoshiarpur</small>
+      <div class="social" id="social"></div>
+      <div class="updated" id="updated"></div>
+    </div>
+    <div class="copy">
+      <small>Contact</small>
+      <code id="email">harkhowal@outlook.com</code>
+      <button id="copybtn" type="button">Copy</button>
+    </div>
+  </div>
+</footer>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="pane" role="dialog" aria-modal="true" aria-labelledby="dr-title">
+    <button class="close" id="dr-close" type="button">Close</button>
+    <div><div class="eyebrow" id="dr-cat"></div><h3 id="dr-title"></h3></div>
+    <div class="meta" id="dr-meta"></div>
+    <div class="tracks" id="dr-tracks"></div>
+    <a class="btn line" id="dr-src" target="_blank" rel="noopener">Open this series on Gurmatveechar →</a>
+  </div>
+</div>
+
+<div class="player" id="player" hidden>
+  <b id="pl-title"></b>
+  <audio id="pl-audio" controls preload="none"></audio>
+  <button class="btn ghost" id="pl-close" type="button">Close</button>
+</div>
+
+<script>
+(function(){
+  var PLAY='<svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg>';
+  var $=function(id){return document.getElementById(id)};
+  function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
+  function get(u,fb){return fetch(u,{cache:'no-cache'}).then(function(r){return r.ok?r.json():fb}).catch(function(){return fb})}
+  function fmtDate(d){if(!d)return'';var t=new Date(d+'T00:00:00');return isNaN(t)?d:t.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}
+  var AUDIO=null;
+
+  Promise.all([get('config.json',{}),get('data/yatra.json',{posts:[]}),get('data/instagram.json',{posts:[]}),get('data/audio.json',{series:[],loose:[]}),get('data/videos.json',{videos:[]})])
+  .then(function(r){var cfg=r[0];renderSocial(cfg);renderYatra(r[1],r[2]);AUDIO=r[3];renderAudio(r[3]);renderVideos(r[4],cfg);
+    var u=[r[3].updated,r[4].updated].filter(Boolean).sort().pop();if(u)$('updated').textContent='Content last updated '+fmtDate(u);});
+
+  function renderSocial(cfg){
+    var s=cfg.social||{},names={youtube:'YouTube',instagram:'Instagram',facebook:'Facebook',tiktok:'TikTok'};
+    Object.keys(names).forEach(function(k){if(s[k]){var a=el('a',null,names[k]);a.href=s[k];a.target='_blank';a.rel='noopener';$('social').appendChild(a)}});
+    if(cfg.contact_email)$('email').textContent=cfg.contact_email;
+    if(cfg.youtube_url)$('yt-more').href=cfg.youtube_url;
+  }
+
+  function renderYatra(manual,ig){
+    var box=$('yatra-list'),posts=(ig.posts||[]).slice(0,6);
+    if(posts.length){posts.forEach(function(p){
+      var a=el('a','post');a.href=p.url;a.target='_blank';a.rel='noopener';
+      var ph=el('div','ph');if(p.image)ph.style.backgroundImage='url("'+p.image+'")';a.appendChild(ph);
+      var bd=el('div','bd');bd.appendChild(el('div','meta',fmtDate(p.date)+' · Instagram'));bd.appendChild(el('p',null,p.caption));a.appendChild(bd);box.appendChild(a)});return}
+    (manual.posts||[]).forEach(function(p){
+      var a=el(p.link?'a':'article','post');if(p.link){a.href=p.link;a.target='_blank';a.rel='noopener'}
+      var ph=el('div','ph',p.image?'':p.place);if(p.image)ph.style.backgroundImage='url("'+p.image+'")';a.appendChild(ph);
+      var bd=el('div','bd'),m=el('div','meta',[p.place,fmtDate(p.date)].filter(Boolean).join(' · '));
+      if(p.example)m.appendChild(el('span','tag','Example'));
+      bd.appendChild(m);bd.appendChild(el('h3',null,p.title));bd.appendChild(el('p',null,p.text));a.appendChild(bd);box.appendChild(a)});
+    if(!box.children.length)box.appendChild(el('div','empty','Travel updates will appear here.'));
+  }
+
+  var cat='All';
+  function renderAudio(d){
+    var series=d.series||[];
+    if(d.loose&&d.loose.length)series=series.concat([{title:'Single divans',category:'Talks & Q&A',page:d.source,count:d.loose.length,tracks:d.loose}]);
+    d._all=series;
+    var total=series.reduce(function(n,s){return n+(s.count||0)},0);
+    $('st-series').textContent=series.length;$('st-tracks').textContent=total.toLocaleString('en-GB')+(series.some(function(s){return !s.count})?'+':'');
+    var cats=['All'];series.forEach(function(s){if(cats.indexOf(s.category)<0)cats.push(s.category)});
+    cats.forEach(function(c){var b=el('button','chip',c);b.type='button';b.setAttribute('aria-pressed',c==='All');
+      b.onclick=function(){cat=c;[].forEach.call($('chips').children,function(x){x.setAttribute('aria-pressed',x===b)});drawSeries()};$('chips').appendChild(b)});
+    $('q').addEventListener('input',drawSeries);drawSeries();
+    var recent=[];series.forEach(function(s){(s.tracks||[]).forEach(function(t){if(t.added)recent.push({t:t,s:s})})});
+    recent.sort(function(a,b){return a.t.added<b.t.added?1:-1});recent=recent.slice(0,6);
+    if(recent.length){$('recent').hidden=false;recent.forEach(function(x){$('recent-list').appendChild(trackRow(x.t,x.s.title+' · added '+fmtDate(x.t.added)))})}
+  }
+  function drawSeries(){
+    var q=$('q').value.trim().toLowerCase(),box=$('series');box.textContent='';
+    AUDIO._all.filter(function(s){return (cat==='All'||s.category===cat)&&(!q||s.title.toLowerCase().indexOf(q)>=0)})
+    .forEach(function(s){var b=el('button','ser'+(s.count>=300?' big':''));b.type='button';
+      b.appendChild(el('b',null,s.title));b.appendChild(el('span',null,(s.count?s.count+' recordings':'Several parts')+' · '+s.category));
+      b.onclick=function(){openSeries(s)};box.appendChild(b)});
+    if(!box.children.length)box.appendChild(el('div','empty','No series match that search.'));
+  }
+  function trackRow(t,sub){
+    var stream=AUDIO&&AUDIO.stream,r=el(stream?'button':'a','trk');
+    if(stream){r.type='button';r.onclick=function(){play(t)}}else{r.href=t.player;r.target='_blank';r.rel='noopener'}
+    var n=el('span','n');n.innerHTML=PLAY;r.appendChild(n);var tx=el('span','t');tx.appendChild(el('b',null,t.title));
+    if(sub||t.group)tx.appendChild(el('span',null,sub||t.group));r.appendChild(tx);return r;
+  }
+  var lastFocus=null;
+  function openSeries(s){
+    lastFocus=document.activeElement;$('dr-cat').textContent=s.category;$('dr-title').textContent=s.title;
+    $('dr-meta').textContent=s.count?s.count+' recordings':'';$('dr-src').href=s.page;
+    var box=$('dr-tracks');box.textContent='';(s.tracks||[]).forEach(function(t){box.appendChild(trackRow(t))});
+    box.hidden=!(s.tracks||[]).length;$('drawer').hidden=false;$('dr-close').focus();
+  }
+  function closeDrawer(){$('drawer').hidden=true;if(lastFocus)lastFocus.focus()}
+  $('dr-close').onclick=closeDrawer;$('drawer').addEventListener('click',function(e){if(e.target===this)closeDrawer()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('drawer').hidden)closeDrawer()});
+  function play(t){$('pl-title').textContent=t.title;var a=$('pl-audio');a.src=t.mp3;$('player').hidden=false;a.play().catch(function(){})}
+  $('pl-close').onclick=function(){var a=$('pl-audio');a.pause();$('player').hidden=true};
+
+  function renderVideos(d,cfg){
+    var box=$('vids'),v=(d.videos||[]).slice(0,9);
+    if(!v.length){box.style.display='block';box.appendChild(el('div','empty','Babaji’s latest YouTube videos appear here after the first daily update.'));return}
+    v.forEach(function(x){
+      var c=el('div','vid'),th=el('button','th');th.type='button';th.setAttribute('aria-label','Play '+x.title);
+      var img=new Image();img.loading='lazy';img.alt='';img.src='https://i.ytimg.com/vi/'+x.id+'/hqdefault.jpg';th.appendChild(img);
+      var pb=el('span','pb');pb.innerHTML=PLAY;th.appendChild(pb);
+      th.onclick=function(){var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+x.id+'?autoplay=1';
+        f.title=x.title;f.allow='autoplay; encrypted-media; picture-in-picture';f.allowFullscreen=true;c.replaceChild(f,th)};
+      c.appendChild(th);c.appendChild(el('h3',null,x.title));c.appendChild(el('span',null,fmtDate(x.published)));box.appendChild(c)});
+  }
+
+  var b=$('copybtn');b.addEventListener('click',function(){
+    var txt=$('email').textContent,done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)};
+    function sel(){var r=document.createRange();r.selectNodeContents($('email'));var s=getSelection();s.removeAllRanges();s.addRange(r)}
+    try{navigator.clipboard.writeText(txt).then(done,sel)}catch(e){sel()}
+  });
+})();
+</script>
+</body>
+</html>
