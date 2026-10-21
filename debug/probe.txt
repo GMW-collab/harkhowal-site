@@ -1,0 +1,40 @@
+== no referer
+HTTP/2 200 
+last-modified: Tue, 13 Jul 2010 05:30:11 GMT
+etag: "6a609d-48b3e29b7fec0"
+accept-ranges: bytes
+content-length: 6971549
+cache-control: max-age=172800
+expires: Fri, 23 Oct 2026 16:29:10 GMT
+vary: User-Agent
+content-type: audio/mpeg
+date: Wed, 21 Oct 2026 16:29:10 GMT
+server: Apache
+
+== foreign referer + range
+HTTP/2 206 
+last-modified: Tue, 13 Jul 2010 05:30:11 GMT
+etag: "6a609d-48b3e29b7fec0"
+accept-ranges: bytes
+content-length: 1024
+cache-control: max-age=172800
+expires: Fri, 23 Oct 2026 16:29:10 GMT
+vary: User-Agent
+content-range: bytes 0-1023/6971549
+content-type: audio/mpeg
+date: Wed, 21 Oct 2026 16:29:10 GMT
+server: Apache
+
+== origin header
+HTTP/2 200 
+last-modified: Tue, 13 Jul 2010 05:30:11 GMT
+etag: "6a609d-48b3e29b7fec0"
+accept-ranges: bytes
+content-length: 6971549
+cache-control: max-age=172800
+expires: Fri, 23 Oct 2026 16:29:10 GMT
+vary: User-Agent
+content-type: audio/mpeg
+date: Wed, 21 Oct 2026 16:29:10 GMT
+server: Apache
+
