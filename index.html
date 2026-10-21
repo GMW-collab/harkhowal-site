@@ -128,6 +128,33 @@ section.band{padding-block:72px 8px}
 .vc .d{font-size:14px;color:var(--muted)}
 .morebar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px}
 
+/* newest-first feed */
+.lead{padding-block:48px 0}
+.month{font-family:var(--head);font-weight:700;font-size:15px;color:var(--muted);padding:26px 0 10px;border-bottom:1px solid var(--rule);position:sticky;top:calc(64px + env(safe-area-inset-top,0px));background:var(--paper);z-index:2}
+.month:first-child{padding-top:0}
+.item{display:grid;grid-template-columns:200px minmax(0,1fr) auto;gap:20px;align-items:center;padding:16px 0;border-bottom:1px solid var(--rule)}
+.item .vt{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:12px;overflow:hidden;background:var(--plum);border:0;padding:0;cursor:pointer}
+.item .vt img{width:100%;height:100%;object-fit:cover}
+.item .vt .mini{position:absolute;inset:0;margin:auto;width:42px;height:42px;border-radius:50%;background:rgba(20,6,10,.7);color:#fff;display:grid;place-items:center}
+.item .vt .mini svg{width:14px;height:14px;fill:currentColor;margin-left:2px}
+.item .art{width:88px;font-size:12px;border-radius:12px;padding:6px;justify-self:start}
+.item .body{min-width:0}
+.item h3{font-size:18px;line-height:1.45;font-weight:700}
+.item h3.g{font-family:var(--body);font-weight:700;font-size:18px}
+.item .meta{font-size:14px;color:var(--muted);margin-top:2px}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:1px 9px;border-radius:999px;background:var(--rule);color:var(--ink);margin-right:8px;vertical-align:1px}
+.tag.v{background:var(--kesri);color:#2b0f05}
+.item .side{display:flex;gap:8px;align-items:center}
+.item .more{background:none;border:1px solid var(--rule);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:14px;font-weight:500;white-space:nowrap}
+.item .list{grid-column:2 / -1;margin-top:-4px}
+.item .pp.big{width:46px;height:46px;cursor:pointer}
+.vmodal{width:min(1000px,100%);background:var(--plum);border-radius:18px;overflow:hidden;color:var(--plum-ink)}
+.vframe{aspect-ratio:16/9;max-width:100%}
+.vframe iframe{width:100%;height:100%;border:0;display:block}
+.vmeta{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:14px 18px}
+.vmeta b{font-size:17px;line-height:1.5}
+.vmeta .x{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:var(--plum-ink);flex:none}
+
 /* library */
 .lib-tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:4px 0 28px}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
@@ -263,6 +290,12 @@ footer p{margin:0 0 6px;color:var(--plum-muted);font-size:15px}
   .sheet-head{grid-template-columns:84px minmax(0,1fr)}
   .sheet-head h3{font-size:22px}
   .row .d{display:none}
+  .item{grid-template-columns:96px minmax(0,1fr);gap:14px}
+  .item .art{width:72px}
+  .item .side{grid-column:1 / -1;justify-content:flex-start}
+  .item .list{grid-column:1 / -1}
+  .item h3{font-size:16px}
+  .month{top:calc(58px + env(safe-area-inset-top,0px))}
 }
 @media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
@@ -283,8 +316,8 @@ footer p{margin:0 0 6px;color:var(--plum-muted);font-size:15px}
   <div class="wrap">
     <a class="logo" href="#top"><i>ੴ</i><b>Harkhowal</b></a>
     <nav aria-label="Main">
-      <a href="#listen">Listen</a>
-      <a href="#watch">Watch</a>
+      <a href="#latest">Newest</a>
+      <a href="#listen">Library</a>
       <a href="#programmes" id="nav-prog" hidden>Programmes</a>
       <a href="#about">About</a>
     </nav>
@@ -312,30 +345,20 @@ footer p{margin:0 0 6px;color:var(--plum-muted);font-size:15px}
   </div>
 </section>
 
-<section class="lead">
+<section class="lead" id="cont" hidden>
   <div class="wrap">
-    <div>
-      <div id="cont" hidden>
-        <div class="h-row"><h2>Continue listening</h2></div>
-        <div class="rows" id="cont-list"></div>
-        <div style="height:40px"></div>
-      </div>
-      <div class="h-row"><h2 id="new-h">New audio</h2><span class="sub" id="new-sub"></span></div>
-      <div class="rows" id="new-list"></div>
-    </div>
-    <div>
-      <div class="h-row"><h2>Start here</h2></div>
-      <div class="feat" id="feat"></div>
-    </div>
+    <div class="h-row"><h2>Continue listening</h2></div>
+    <div class="rows" id="cont-list"></div>
   </div>
 </section>
 
-<section class="band" id="watch">
+<section class="band" id="latest">
   <div class="wrap">
-    <div class="h-row"><h2>Latest videos</h2><span class="sub">Newest first, from Babaji's YouTube channel</span></div>
-    <div class="vgrid" id="vgrid"></div>
+    <div class="h-row"><h2>Newest first</h2><span class="sub">Every video and recording, latest at the top</span></div>
+    <div class="chips" id="fchips" role="group" aria-label="Show by topic" style="margin-bottom:28px"></div>
+    <div class="feed" id="feed"></div>
     <div class="morebar">
-      <button class="btn plain" id="v-more" type="button" hidden>Show more videos</button>
+      <button class="btn plain" id="f-more" type="button" hidden>Show older katha</button>
       <a class="btn plain" id="yt" href="https://www.youtube.com/@Santjagjitsinghjiharkhowal" target="_blank" rel="noopener">Open the YouTube channel</a>
     </div>
   </div>
@@ -343,7 +366,7 @@ footer p{margin:0 0 6px;color:var(--plum-muted);font-size:15px}
 
 <section class="band" id="listen">
   <div class="wrap">
-    <div class="h-row"><h2>Katha library</h2><span class="sub" id="lib-sub"></span></div>
+    <div class="h-row"><h2>Library by topic</h2><span class="sub" id="lib-sub"></span></div>
     <div class="lib-tools">
       <div class="chips" id="chips" role="group" aria-label="Show series by type"></div>
       <label class="libsearch"><svg class="icon"><use href="#i-search"/></svg><input id="lib-q" type="search" placeholder="Find a series or recording" aria-label="Find a series or recording"></label>
@@ -407,8 +430,8 @@ footer p{margin:0 0 6px;color:var(--plum-muted);font-size:15px}
     <div class="sheet-tools">
       <button class="btn sun" id="s-play" type="button"><svg class="icon"><use href="#i-play"/></svg><span>Play from the start</span></button>
       <div class="seg" role="group" aria-label="Order">
-        <button type="button" id="o-part" aria-pressed="true">In order</button>
-        <button type="button" id="o-new" aria-pressed="false">Newest first</button>
+        <button type="button" id="o-new" aria-pressed="true">Newest first</button>
+        <button type="button" id="o-part" aria-pressed="false">In order</button>
       </div>
     </div>
     <div class="rows" id="s-rows"></div>
@@ -419,6 +442,13 @@ footer p{margin:0 0 6px;color:var(--plum-muted);font-size:15px}
   <div class="sbox" role="dialog" aria-modal="true" aria-label="Search">
     <div class="in"><svg class="icon"><use href="#i-search"/></svg><input id="sq" type="search" placeholder="Search recordings, series and videos" aria-label="Search recordings, series and videos"><button class="x" style="position:static" id="sq-close" type="button" aria-label="Close search"><svg><use href="#i-x"/></svg></button></div>
     <div class="sres" id="sres"><div class="hint">Try ਜਪੁਜੀ, Sukhmani, Vichar Sagar or 1990.</div></div>
+  </div>
+</div>
+
+<div class="search" id="vbox" hidden>
+  <div class="vmodal" role="dialog" aria-modal="true" aria-label="Video">
+    <div class="vframe" id="vframe"></div>
+    <div class="vmeta"><b class="g" id="vtitle"></b><button class="x" style="position:static" id="vclose" type="button" aria-label="Close video"><svg><use href="#i-x"/></svg></button></div>
   </div>
 </div>
 
@@ -469,7 +499,8 @@ Promise.all([get('data/audio.json',{series:[]}),get('data/videos.json',{videos:[
   var a=r[0];S.base=a.base||'';S.series=a.series||[];S.videos=r[1].videos||[];
   S.series.forEach(function(s){s.tracks.forEach(function(t,i){t.s=s;t.i=i;S.all.push(t);S.byP[t.p]=t});
     s.latest=s.latest||s.tracks.reduce(function(m,t){return t.d>m?t.d:m},'')});
-  footer(r[3],a,r[1]);hero();newAudio();cont();feat();videos();library();programmes(r[2].programmes||[]);restore();
+  footer(r[3],a,r[1]);hero();cont();buildFeed();library();programmes(r[2].programmes||[]);restore();
+  var L=latestTracks(50).filter(function(t,_,arr){return t.s===arr[0].s&&t.d===arr[0].d});$('h-listen').onclick=function(){if(L[0])play(L[0],L)};if(!L.length)$('h-listen').hidden=true;
 });
 
 // ---------- hero
@@ -486,61 +517,82 @@ function hero(){
   $('h-screen').onclick=watch;$('h-watch').onclick=function(){watch();$('h-screen').scrollIntoView({block:'center',behavior:'smooth'})};
 }
 
-// ---------- audio lists
+// ---------- newest-first feed
 function latestTracks(n){
-  var dated=S.all.filter(function(t){return t.d}).sort(function(a,b){return a.d<b.d?1:a.d>b.d?-1:a.i-b.i});
-  if(dated.length)return{list:dated.slice(0,n),dated:true};
-  var single=S.all.filter(function(t){return /^\d{4}/.test(t.t)}).sort(function(a,b){return a.t<b.t?1:-1});
-  return{list:single.slice(0,n),dated:false};
+  var dated=S.all.filter(function(t){return t.d}).sort(function(a,b){return a.d<b.d?1:a.d>b.d?-1:a.s===b.s?a.i-b.i:0});
+  return dated.slice(0,n);
 }
 function row(t,opts){
   opts=opts||{};var b=el('button','row');b.type='button';b.dataset.p=t.p;
   var pp=el('span','pp');pp.appendChild(svg(Q.cur===t&&!A.paused?'i-pause':'i-play'));b.appendChild(pp);
-  var tx=el('span','t');tx.appendChild(el('b',null,t.t));
-  var sub=opts.sub!=null?opts.sub:(t.g||(opts.showSeries?(t.s.title):''));if(sub)tx.appendChild(el('span',null,sub));
+  var tx=el('span','t');tx.appendChild(el('b',null,opts.title||t.t));
+  var sub=opts.sub!=null?opts.sub:(t.g||'');if(sub)tx.appendChild(el('span',null,sub));
   var pos=store.get('pos:'+t.p,null);if(pos&&pos.d&&opts.progress!==false){var bar=el('div','bar'),i=el('i');i.style.width=Math.min(100,pos.t/pos.d*100)+'%';bar.appendChild(i);tx.appendChild(bar)}
   b.appendChild(tx);b.appendChild(el('span','d',opts.date!==false?(t.d?ago(t.d):''):''));
   if(Q.cur===t)b.classList.add('on');
   b.onclick=function(){if(Q.cur===t){toggle()}else play(t,opts.queue||t.s.tracks)};
   return b;
 }
-function newAudio(){
-  var L=latestTracks(6),box=$('new-list');box.textContent='';
-  if(!L.dated){$('new-h').textContent='Recent recordings';}
-  else $('new-sub').textContent='Newest uploads first';
-  L.list.forEach(function(t){box.appendChild(row(t,{showSeries:true,sub:t.s.title+(t.g?', '+t.g:''),queue:L.list}))});
-  $('h-listen').onclick=function(){if(L.list[0])play(L.list[0],L.list)};
-  if(!L.list.length){$('h-listen').hidden=true}
-}
 function cont(){
   var rec=store.get('recent',[]).map(function(p){return S.byP[p]}).filter(Boolean).filter(function(t){var x=store.get('pos:'+t.p,null);return x&&x.d&&x.t<x.d-20}).slice(0,3);
   var box=$('cont-list');box.textContent='';$('cont').hidden=!rec.length;
   rec.forEach(function(t){box.appendChild(row(t,{sub:t.s.title+(t.g?', '+t.g:''),date:false}))});
 }
-function feat(){
-  var box=$('feat');box.textContent='';
-  S.series.filter(function(s){return s.id!=='single-divans'}).slice().sort(function(a,b){return b.tracks.length-a.tracks.length}).slice(0,4).forEach(function(s){
-    var b=el('button','cover');b.type='button';var a=el('span','art');art(a,s);b.appendChild(a);
-    var d=el('span');d.appendChild(el('b',null,s.title));d.appendChild(el('span',null,s.tracks.length+' recordings'));b.appendChild(d);
-    b.onclick=function(){openSeries(s)};box.appendChild(b)});
+// Videos get a topic when their title mentions one; otherwise they sit under Videos only.
+var VTOPIC={'Gurbani':['ਜਪੁਜੀ','ਜਪੁ ਜੀ','ਸੁਖਮਨੀ','ਗੁਰਬਾਣੀ','ਸ਼ਬਦ','ਸਬਦ','ਬਾਣੀ','ਆਸਾ ਕੀ ਵਾਰ','ਬਾਰਹ ਮਾਹਾ'],
+  'Itihaas':['ਇਤਿਹਾਸ','ਸਾਖੀ','ਸ਼ਹੀਦ','ਸੂਰਜ ਪ੍ਰਕਾਸ਼','ਨਾਨਕ ਪ੍ਰਕਾਸ਼'],
+  'Bhai Gurdas & Bhai Nand Lal':['ਭਾਈ ਗੁਰਦਾਸ','ਭਾਈ ਨੰਦ ਲਾਲ','ਕਬਿੱਤ'],
+  'Vedant & Darshan':['ਵੇਦਾਂਤ','ਵਿਚਾਰ ਸਾਗਰ','ਯੋਗ','ਆਤਮ','ਵੈਰਾਗ']};
+function vtopics(v){var t=v.title+' '+(v.description||''),out=['Videos'];
+  Object.keys(VTOPIC).forEach(function(k){if(VTOPIC[k].some(function(w){return t.indexOf(w)>=0}))out.push(k)});return out}
+function buildFeed(){
+  var items=[];
+  S.videos.forEach(function(v){items.push({kind:'v',d:v.published,v:v,topics:vtopics(v)})});
+  var groups={};S.all.forEach(function(t){if(!t.d)return;var k=t.s.id+'|'+t.d;(groups[k]=groups[k]||{kind:'a',d:t.d,s:t.s,tracks:[],topics:[t.s.category]}).tracks.push(t)});
+  Object.keys(groups).forEach(function(k){groups[k].tracks.sort(function(a,b){return a.i-b.i});items.push(groups[k])});
+  items.sort(function(a,b){return a.d<b.d?1:a.d>b.d?-1:(a.kind==='v'?-1:1)});
+  S.feed=items;
+  var topics=['All','Videos'];S.series.forEach(function(s){if(topics.indexOf(s.category)<0)topics.push(s.category)});
+  topics.forEach(function(c){var b=el('button','chip',c);b.type='button';b.setAttribute('aria-pressed',String(c==='All'));
+    b.onclick=function(){S.ftopic=c;S.fshown=20;[].forEach.call($('fchips').children,function(x){x.setAttribute('aria-pressed',String(x===b))});drawFeed()};$('fchips').appendChild(b)});
+  S.ftopic='All';S.fshown=20;drawFeed();
 }
-
-// ---------- videos
-var shown=6;
-function videos(){
-  var box=$('vgrid');box.textContent='';var list=S.videos.slice(1);
-  if(!list.length){box.appendChild(el('p','sub','New videos from YouTube appear here automatically.'));return}
-  list.slice(0,shown).forEach(function(v){
-    var c=el('div','vc'),th=el('button','thumb');th.type='button';th.setAttribute('aria-label','Play video: '+v.title);
-    var img=new Image();img.loading='lazy';img.alt='';img.onerror=function(){img.style.visibility='hidden'};img.src='https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg';th.appendChild(img);
-    var days=(Date.now()-new Date(v.published+'T12:00:00Z'))/864e5;if(days<10)th.appendChild(el('span','new','New'));
-    var m=el('span','mini');m.appendChild(svg('i-play'));th.appendChild(m);
-    th.onclick=function(){var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+v.id+'?autoplay=1&rel=0';f.title=v.title;
-      f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;c.replaceChild(f,th);pause()};
-    c.appendChild(th);c.appendChild(el('h3',null,v.title.replace(/\s*\|\|\s*/g,'. ')));c.appendChild(el('span','d',ago(v.published)));box.appendChild(c)});
-  $('v-more').hidden=list.length<=shown;
+function commonPrefix(ts){if(ts.length<2)return'';var a=ts[0].t,z=ts[ts.length-1].t,i=0;while(i<a.length&&a[i]===z[i])i++;
+  var cut=a.slice(0,i).replace(/[^\s–-]*$/,'');return cut.length>4?cut:''}
+function shortT(t,pre){var x=pre&&t.t.indexOf(pre)===0?t.t.slice(pre.length).replace(/^[\s–-]+/,''):t.t;return x||t.t}
+function rangeLabel(ts){return ts.length===1?shortT(ts[0],commonPrefix([{t:ts[0].s.title}].concat(ts))):ts.length+' recordings'}
+function drawFeed(){
+  var box=$('feed');box.textContent='';var list=S.feed.filter(function(x){return S.ftopic==='All'||x.topics.indexOf(S.ftopic)>=0});
+  var month='';
+  list.slice(0,S.fshown).forEach(function(x){
+    var m=x.d.slice(0,7);if(m!==month){month=m;var p=m.split('-');box.appendChild(el('div','month',['January','February','March','April','May','June','July','August','September','October','November','December'][+p[1]-1]+' '+p[0]))}
+    var it=el('div','item');
+    if(x.kind==='v'){var v=x.v,th=el('button','vt');th.type='button';th.setAttribute('aria-label','Play video: '+v.title);
+      var img=new Image();img.loading='lazy';img.alt='';img.onerror=function(){img.style.visibility='hidden'};img.src='https://i.ytimg.com/vi/'+v.id+'/mqdefault.jpg';th.appendChild(img);
+      var mi=el('span','mini');mi.appendChild(svg('i-play'));th.appendChild(mi);th.onclick=function(){openVideo(v)};it.appendChild(th);
+      var bd=el('div','body');bd.appendChild(el('h3','g',v.title.replace(/\s*\|\|\s*/g,'. ')));
+      var mt=el('div','meta');mt.appendChild(el('span','tag v','Video'));mt.appendChild(document.createTextNode(ago(v.published)));bd.appendChild(mt);it.appendChild(bd);
+      var sd=el('div','side');var w=el('button','more','Watch');w.type='button';w.onclick=function(){openVideo(v)};sd.appendChild(w);it.appendChild(sd);
+    }else{
+      var a=el('span','art');art(a,x.s);it.appendChild(a);
+      var bd2=el('div','body');bd2.appendChild(el('h3',null,x.s.title));
+      var mt2=el('div','meta');mt2.appendChild(el('span','tag',x.s.category));mt2.appendChild(document.createTextNode(rangeLabel(x.tracks)+' added '+(/ago|today|yesterday/i.test(ago(x.d))?ago(x.d).toLowerCase():'on '+fdate(x.d))));bd2.appendChild(mt2);it.appendChild(bd2);
+      var sd2=el('div','side');var pb=el('button','pp big');pb.type='button';pb.setAttribute('aria-label','Play '+x.s.title);pb.appendChild(svg('i-play'));
+      pb.onclick=function(){play(x.tracks[0],x.tracks)};sd2.appendChild(pb);
+      if(x.tracks.length>1){var mb=el('button','more','Show '+x.tracks.length);mb.type='button';var lst=el('div','rows list');lst.hidden=true;
+        mb.onclick=function(){var pre=commonPrefix(x.tracks);if(!lst.children.length)x.tracks.forEach(function(t){lst.appendChild(row(t,{queue:x.tracks,date:false,title:shortT(t,pre)}))});lst.hidden=!lst.hidden;mb.textContent=lst.hidden?'Show '+x.tracks.length:'Hide'};
+        sd2.appendChild(mb);it.appendChild(sd2);it.appendChild(lst)}else it.appendChild(sd2);
+    }
+    box.appendChild(it)});
+  if(!list.length)box.appendChild(el('p','sub','Nothing under this topic yet.'));
+  $('f-more').hidden=list.length<=S.fshown;
 }
-$('v-more').onclick=function(){shown+=9;videos()};
+$('f-more').onclick=function(){S.fshown+=15;drawFeed()};
+function openVideo(v){pause();$('vtitle').textContent=v.title.replace(/\s*\|\|\s*/g,'. ');var f=document.createElement('iframe');
+  f.src='https://www.youtube-nocookie.com/embed/'+v.id+'?autoplay=1&rel=0';f.title=v.title;f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;
+  $('vframe').textContent='';$('vframe').appendChild(f);$('vbox').hidden=false;document.body.style.overflow='hidden';$('vclose').focus()}
+function closeVideo(){$('vframe').textContent='';$('vbox').hidden=true;document.body.style.overflow=''}
+$('vclose').onclick=closeVideo;$('vbox').addEventListener('click',function(e){if(e.target===this)closeVideo()});
 
 // ---------- library
 function library(){
@@ -554,21 +606,21 @@ function library(){
 function norm(s){return(s||'').toLowerCase().replace(/[_\-–.]/g,' ').replace(/\s+/g,' ')}
 function drawLib(){
   var q=norm($('lib-q').value.trim()),shelf=$('shelf'),cats=$('cats');shelf.textContent='';cats.textContent='';
-  var list=S.series.filter(function(s){return(S.cat==='All'||s.category===S.cat)&&(!q||norm(s.title+' '+s.gurmukhi).indexOf(q)>=0)});
+  var list=S.series.filter(function(s){return(S.cat==='All'||s.category===S.cat)&&(!q||norm(s.title+' '+s.gurmukhi).indexOf(q)>=0)}).sort(function(a,b){return a.latest<b.latest?1:a.latest>b.latest?-1:b.tracks.length-a.tracks.length});
   // matching recordings
   var f=$('found');if(q.length>1){var hits=S.all.filter(function(t){return(S.cat==='All'||t.s.category===S.cat)&&norm(t.t+' '+(t.g||'')).indexOf(q)>=0});
     f.hidden=!hits.length;$('found-sub').textContent=hits.length>20?'Showing 20 of '+hits.length:'';var fl=$('found-list');fl.textContent='';
     hits.slice(0,20).forEach(function(t){fl.appendChild(row(t,{sub:t.s.title+(t.g?', '+t.g:''),queue:hits}))})}else f.hidden=true;
   if(S.cat==='All'&&!q){
-    S.series.filter(function(s){return s.id!=='single-divans'}).slice().sort(function(a,b){return b.tracks.length-a.tracks.length}).slice(0,3).forEach(function(s){
+    list.filter(function(s){return s.id!=='single-divans'}).slice(0,3).forEach(function(s){
       var b=el('button','book');b.type='button';var a=el('span','art');art(a,s);b.appendChild(a);b.appendChild(el('b',null,s.title));
-      b.appendChild(el('span',null,s.tracks.length.toLocaleString('en-GB')+' recordings'));b.onclick=function(){openSeries(s)};shelf.appendChild(b)})}
+      b.appendChild(el('span',null,s.tracks.length.toLocaleString('en-GB')+' recordings, last added '+fdate(s.latest)));b.onclick=function(){openSeries(s)};shelf.appendChild(b)})}
   var groups={};list.forEach(function(s){(groups[s.category]=groups[s.category]||[]).push(s)});
   Object.keys(groups).forEach(function(c){
     var sec=el('div','cat');sec.appendChild(el('h3',null,c));var ix=el('div','index');var LIM=(S.cat==='All'&&!q)?8:999;
     groups[c].forEach(function(s,k){var b=el('button','ix');b.type='button';if(k>=LIM)b.hidden=true;
       b.appendChild(el('span','gn'+(s.gurmukhi?'':' en'),s.gurmukhi||s.title));b.appendChild(el('span','n',s.tracks.length));
-      b.appendChild(el('span','en',s.gurmukhi?s.title:(s.latest?'Updated '+fdate(s.latest):'')));
+      b.appendChild(el('span','en',(s.gurmukhi?s.title+', ':'')+(s.latest?'last added '+fdate(s.latest):'')));
       b.onclick=function(){openSeries(s)};ix.appendChild(b)});
     sec.appendChild(ix);
     if(groups[c].length>LIM){var more=el('button','showall','Show all '+groups[c].length+' series');more.type='button';
@@ -580,7 +632,7 @@ function drawLib(){
 // ---------- series sheet
 var cur=null,order='part',lastFocus=null;
 function openSeries(s){
-  cur=s;order='part';lastFocus=document.activeElement;
+  cur=s;order='new';lastFocus=document.activeElement;
   art($('s-art'),s);$('s-title').textContent=s.gurmukhi||s.title;$('s-en').textContent=s.gurmukhi?s.title:'';
   $('s-sub').textContent=s.tracks.length+' recordings'+(s.latest?', last added '+fdate(s.latest):'');
   drawSheet();$('veil').hidden=false;document.body.style.overflow='hidden';$('s-close').focus();
@@ -620,7 +672,7 @@ function doSearch(){
 }
 document.addEventListener('keydown',function(e){
   var typing=/INPUT|TEXTAREA/.test(document.activeElement.tagName);
-  if(e.key==='Escape'){if(!$('search').hidden)closeSearch();else if(!$('veil').hidden)closeSheet();else if($('player').classList.contains('open'))$('player').classList.remove('open')}
+  if(e.key==='Escape'){if(!$('vbox').hidden)closeVideo();else if(!$('search').hidden)closeSearch();else if(!$('veil').hidden)closeSheet();else if($('player').classList.contains('open'))$('player').classList.remove('open')}
   else if((e.key==='/'&&!typing)||(e.key==='k'&&(e.metaKey||e.ctrlKey))){e.preventDefault();openSearch()}
   else if(e.key===' '&&!typing&&Q.cur&&!/BUTTON|A/.test(document.activeElement.tagName)){e.preventDefault();toggle()}
 });
