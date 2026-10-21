@@ -96,8 +96,9 @@ def update_youtube():
 
 
 # ---------------------------------------------------------- Gurmatveechar
-FOLDER_RE = re.compile(r'href="([^"]*audio\.php\?q=f&(?:amp;)?f=([^"&#]+))"', re.I)
-MP3_RE = re.compile(r'href="([^"]*?/audios/[^"]+?\.mp3)"', re.I)
+# Links on Gurmatveechar are sometimes quoted and sometimes not, so accept both.
+FOLDER_RE = re.compile(r'href=["\']?([^"\'\s>]*audio\.php\?q=f&(?:amp;)?f=([^"\'\s>&#]+))', re.I)
+MP3_RE = re.compile(r'href=["\']?([^"\'\s>]*?/audios/[^"\'\s>]+?\.mp3)', re.I)
 
 
 def folder_url(path):
@@ -208,7 +209,7 @@ def update_audio():
     loose = [stamp({"title": track_title(f), "group": "", "path": f}) for f in tree["files"]]
 
     new_total = sum(s["count"] for s in series) + len(loose)
-    old_total = sum(len(s.get("tracks", [])) for s in old.get("series", [])) + len(old.get("loose", []))
+    old_total = sum(s.get("count", 0) for s in old.get("series", [])) + len(old.get("loose", []))
     if old_total and new_total < old_total * 0.5:
         print(f"Gurmatveechar: only {new_total} of {old_total} tracks found, kept previous data", file=sys.stderr)
         return
